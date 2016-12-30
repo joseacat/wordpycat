@@ -7,6 +7,22 @@ Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
+
+
+/* General */
 html{
   background: gainsboro;
+}
+
+.contenido-principal{
+  padding-top: 60px;
+}
+
+.img-listado{
+  text-align: center;
+}
+
+.img-listado img{
+  max-width: 100%;
+  height: auto;
 }

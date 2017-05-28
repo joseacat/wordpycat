@@ -9,24 +9,28 @@
     <?php wp_head(); ?>
   </head>
 <body <?php body_class(isset($class) ? $class : ''); ?>>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><?php bloginfo('name'); ?></a>
+  <nav class="navbar-cabecera" role="navigation">
+        <div class="contenedor">
+            <div class="navbar-logo">
+                <?php
+                $logo_id = get_theme_mod('custom_logo');
+                $logo = wp_get_attachment_image_src($logo_id, 'full');
+                if(has_custom_logo()){
+                ?>
+                    <img src="<?php echo esc_url($logo[0]); ?>">
+                <?php
+                }else{
+                ?>
+                    <h1> <?php echo get_bloginfo( 'name' ); ?> </h1>
+                <?php
+                }
+                ?>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-menu">
                 <?php wp_nav_menu( array( 'theme_location' => 'menu-principal',  'menu_class' => 'nav navbar-nav' ) ); ?>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
-    <div class="container contenido-principal">
+    <div class="contenedor contenido-principal">

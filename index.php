@@ -7,20 +7,20 @@
 // Cabecera
 get_header(); ?>
 
-<div class="row">
+<div class="fila">
 <?php
 if(have_posts()){
   while(have_posts()){
 ?>
     <?php the_post(); ?>
-    <section class="col-md-4 col-sm-12">
-      <div class="img-listado">
+    <section>
+      <div>
         <?php
         if(has_post_thumbnail()){
           the_post_thumbnail('thumbnail');
         }else{
           ?>
-          <img src="<?php echo get_template_directory_uri(); ?>/recursos/img/sin-imagen.jpg" alt="Sin imagen">
+          <img src="<?php echo get_template_directory_uri(); ?>/recursos/img/sin-imagen.jpg" alt="<?php _x('Sin imagen', 'woopycat'); ?>">
           <?php
         }
         ?>

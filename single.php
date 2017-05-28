@@ -7,7 +7,7 @@
 get_header(); ?>
 
 <?php
-if(have_posts()){
+if(has_post_thumbnail()){
   the_post();
   if(has_thumbnail){
     the_post_thumbnail();

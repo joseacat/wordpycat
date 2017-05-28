@@ -9,7 +9,7 @@ get_header(); ?>
 <?php
 if(have_posts()){
   the_post();
-  if(has_thumbnail){
+  if(has_post_thumbnail()){
     the_post_thumbnail();
   }
   the_title('<h1>','</h1>');

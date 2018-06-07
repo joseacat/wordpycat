@@ -4,9 +4,8 @@
  */
  
 // Cabecera
-get_header(); ?>
+get_header();
 
-<?php
 if(has_post_thumbnail()){
   the_post();
   if(has_thumbnail){
@@ -17,9 +16,7 @@ if(has_post_thumbnail()){
 }else{
   echo "No hay contenido en este post.";
 }
-?>
 
-<?php
 // Footer
 get_footer();
 ?>

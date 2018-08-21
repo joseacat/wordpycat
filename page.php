@@ -6,7 +6,7 @@
 // Cabecera
 get_header();
 
-if(has_post_thumbnail()){
+if(has_posts()){
   the_post();
   if(has_thumbnail()){
     the_post_thumbnail('thumbnail');

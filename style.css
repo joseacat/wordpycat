@@ -13,6 +13,18 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 html{
   background: #F4F4F4;
 }
+.contenedor .alignwide{
+  margin-left: -80px;
+  margin-right: -80px;	
+}
+.contenedor .alignfull{
+  margin-left: calc(-100vw / 2 + 100% / 2);
+  margin-right: calc(-100vw / 2 + 100% / 2);
+  max-width: calc(100vw - 8px);
+}
+.alignfull img{
+  width: 100vw;
+}
 
 /* Estilos generales para textos */
 /* =WordPress Core

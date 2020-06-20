@@ -60,9 +60,10 @@ function registrar_sidebar() {
 add_action( 'widgets_init', 'registrar_sidebar' );
 
 /**
- * Permite utilizar la funcionalidad de WordPress para añadir logo al header
+ * Personaliza el tema
  */
-function custom_logo_tema() {
+function customizar_tema() {
+    // Permite utilizar la funcionalidad de WordPress para añadir logo al header
     $defaults = array(
         'height'      => 100,
         'width'       => 400,
@@ -71,5 +72,7 @@ function custom_logo_tema() {
         'header-text' => array( 'site-title', 'site-description' ),
     );
     add_theme_support( 'custom-logo', $defaults );
+    // Permite alignwide y fullalign de Gutenberg
+    add_theme_support( 'align-wide' );
 }
-add_action( 'after_setup_theme', 'custom_logo_tema' );
+add_action( 'after_setup_theme', 'customizar_tema' );

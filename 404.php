@@ -6,11 +6,12 @@
 // Cabecera
 get_header(); ?>
 
-<p>
-  Error404
-</p>
+<div>
+	<p>
+		<?php echo __('Error404', 'wordpyacat'); ?>
+	</p>
+</div>
 
 <?php
 // Footer
 get_footer();
-?>

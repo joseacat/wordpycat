@@ -5,8 +5,10 @@
 
 // Cabecera
 get_header();
+?>
 
 <div>
+	<?php
 	if(have_posts()){
 		the_post();
 		if(has_post_thumbnail()){
@@ -15,9 +17,11 @@ get_header();
 		the_title('<h1>','</h1>');
 		the_content();
 	}else{
-		echo __('No hay contenido en este post.', 'wordpycat'); ?>
+		echo __('No hay contenido en este post.', 'wordpycat');
 	}
+	?>
 </div>
 
+<?php
 // Footer
 get_footer();

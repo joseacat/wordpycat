@@ -16,19 +16,7 @@
 		<div>
 			<div>
 				<a href="<?php echo get_site_url(); ?>" title="<?php the_title(); ?>">
-					<?php
-					$logo_id = get_theme_mod('custom_logo');
-					$logo = wp_get_attachment_image_src($logo_id, 'full');
-					if(has_custom_logo()){
-						?>
-                        <img src="<?php echo esc_url($logo[0]); ?>">
-						<?php
-					}else{
-						?>
-						<h1> <?php echo get_bloginfo( 'name' ); ?> </h1>
-						<?php
-					}
-					?>
+					<?php echo pintar_logo(); ?>
 				</a>
 			</div>
 			<nav role="navigation">

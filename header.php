@@ -20,7 +20,7 @@
 				</a>
 			</div>
 			<nav role="navigation">
-				<?php wp_nav_menu( array( 'theme_location' => 'menu-principal',  'menu_class' => 'nav navbar-nav' ) ); ?>
+				<?php wp_nav_menu( array( 'theme_location' => 'menu-principal',  'menu_class' => 'nav navbar-nav', 'container' => 'ul' ) ); ?>
 			</nav>
 			<div>
 				<?php get_search_form(); ?>

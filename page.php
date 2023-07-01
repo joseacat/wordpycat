@@ -1,27 +1,24 @@
 <?php
 /**
- * Plantilla para mostrar el contenido de la página.
+ * Plantilla para mostrar el contenido de una página.
  */
-
+ 
 // Cabecera
 get_header();
-?>
 
-<div>
-	<?php
-	if(have_posts()){
-		the_post();
+if(have_posts()){
+	the_post(); ?>
+	<article>
+		<?php
 		if(has_post_thumbnail()){
 			the_post_thumbnail('thumbnail');
 		}
 		the_title('<h1>','</h1>');
 		the_content();
-	}else{
-		echo __('No hay contenido en este post.', 'wordpycat');
-	}
-	?>
-</div>
-
+		?>
+	</article>
 <?php
+}
+
 // Footer
 get_footer();

@@ -12,6 +12,7 @@ function registrar_jscss(){
 	$version = '1.0.0';
 
 	// Añadimos las hojas de estilos
+	wp_enqueue_style('simple', get_template_directory_uri() . '/recursos/css/simple.min.css', array(), $version);
 	wp_enqueue_style('style', get_stylesheet_uri(), array(), $version);
 
 	// Añadimos los archivos JavaScript

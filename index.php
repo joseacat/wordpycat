@@ -11,6 +11,7 @@ get_header(); ?>
 if(have_posts()){
 	while(have_posts()){
 		?>
+		<article>
 		<?php the_post(); ?>
 		<?php
 		if(has_post_thumbnail()){
@@ -24,7 +25,8 @@ if(have_posts()){
 		<a href="<?php the_permalink(); ?>">
 			<?php the_title('<h1>','</h1>'); ?>
 		</a>
-		<?php the_excerpt(); ?>
+		<p><?php the_excerpt(); ?></p>
+		</article>
 		<?php
 	}
 	next_posts_link( '<<');

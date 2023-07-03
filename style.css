@@ -49,75 +49,13 @@ Text Domain: wordpycat
 :root {
 	--acotado: 990px;
 }
-
-
-/* Reset */
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-ul:not([class]),
-ol:not([class]) {
-	padding: 0;
-	padding-inline-start: 20px;
-	font-size: 18px;
-	margin-left: 20px;
-}
-ul:not([class]) li,
-ol:not([class]) li{
-	margin: 0 0 20px;
-}
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-ul[class],
-ol[class],
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
-	margin: 0;
-}
+/* --wp--style--global--content-size: 840px; */
+/* --wp--style--global--wide-size: 1100px; */
 body {
 	min-height: 100vh;
 	scroll-behavior: smooth;
 	text-rendering: optimizeSpeed;
 }
-a:not([class]) {
-	text-decoration-skip-ink: auto;
-    text-decoration: none;
-}
-img {
-	max-width: 100%;
-	display: block;
-    height: auto;
-}
-input,
-button,
-textarea,
-select {
-	font: inherit;
-}
-select{
-	border: 1px solid;
-	padding: 22px 20px 17px;
-	width: 100%;
-	height: 64px;
-}
-label{
-	display: inline-block;
-	margin-bottom: 8px;
-}
-/* Fin Reset */
-
 /* General */
 html{
 	background: var(--blanco);
@@ -127,16 +65,5 @@ html{
 }
 .alignleft {
 	float: left;
-}
-a img.alignright {
-	float: right;
-}
-a img.alignleft {
-	float: left;
-}
-a img.aligncenter {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
 }
 /* Fin General */

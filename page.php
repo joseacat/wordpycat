@@ -8,7 +8,7 @@ get_header();
 
 if(have_posts()){
 	the_post(); ?>
-	<article>
+	<section>
 		<?php
 		if(has_post_thumbnail()){
 			the_post_thumbnail('thumbnail');
@@ -16,7 +16,7 @@ if(have_posts()){
 		the_title('<h1>','</h1>');
 		the_content();
 		?>
-	</article>
+	</section>
 <?php
 }
 

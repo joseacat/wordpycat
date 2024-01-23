@@ -2,6 +2,7 @@
 
 include(plugin_dir_path( __FILE__) . 'includes/config.php');
 include(plugin_dir_path( __FILE__) . 'includes/extras.php');
+include(plugin_dir_path( __FILE__) . 'includes/blocks.php');
 
 
 /*

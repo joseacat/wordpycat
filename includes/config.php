@@ -72,3 +72,16 @@ EOT;
     return $html;
 }
 add_filter( 'style_loader_tag', 'agregar_rel_preload', 10, 4 );
+
+
+/**
+ * Elimina link innecesarios del head
+ */
+function remove_headlinks() {
+    remove_action( 'wp_head', 'wp_generator' );
+    remove_action( 'wp_head', 'rsd_link' );
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+}
+add_action( 'init', 'remove_headlinks' );

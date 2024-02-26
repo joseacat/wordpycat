@@ -1,11 +1,10 @@
 {
-    "name": "wordpycat/wordpycatblock",
+    "name": "wordpycat/wordpycat-block",
     "title": "Bloque de ejemplo para theme Wordpycat",
     "description": "Descripción del bloque de ejemplo.",
     "category": "wordpycat",
     "icon": "embed-post",
     "style": ["file:./estilos.css"],
-    "editorStyle": ["file:./editor.css"],
     "keywords": ["featured", "blog", "posts", "selection"],
     "apiVersion": 2,
     "acf": {

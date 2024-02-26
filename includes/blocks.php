@@ -20,7 +20,10 @@ add_filter( 'block_categories_all', 'agregar_categoria_bloques', 1, 2 );
  */
 
 function registrar_bloques() {
-    register_block_type( get_template_directory_uri() . '/blocks/bannerCards' );
+    error_log('Registrando bloques');
+    if( function_exists('register_block_type') ){
+        register_block_type( WORDPYCAT_PATH . 'blocks/wordpycat-block' );
+    }
 }
 
 add_action( 'acf/init', 'registrar_bloques' );
@@ -35,7 +38,7 @@ add_action( 'acf/init', 'registrar_bloques' );
     $version = '1.0.0';
 
     // Añadir aquí los scripts de todos los bloques
-    wp_register_script( 'wordpycat-block', get_template_directory_uri() . 'blocks/wordpycat/app.js', array( 'acf' ), $version, true );
+    wp_register_script( 'wordpycat-block', get_template_directory_uri() . 'blocks/wordpycat-block/app.js', array( 'acf' ), $version, true );
 
 }
 
@@ -48,12 +51,38 @@ add_action( 'acf/init', 'registrar_scripts_bloques' );
  * https://www.advancedcustomfields.com/resources/local-json/#saving-explained
  */
 function guardar_custom_fields( $path ) {
-    $path = get_template_directory_uri() . '/fields';
+    $path = WORDPYCAT_PATH. 'fields';
 
 	return $path;
 }
 
 add_filter('acf/settings/save_json', 'guardar_custom_fields' );
+
+
+
+/**
+ * Customiza el nombre de los archivos que se guardan.
+ */
+
+function custom_acf_json_filename( $filename, $post, $load_path ) {
+    $filename = str_replace(
+        array(
+            ' ',
+            '_',
+        ),
+        array(
+            '-',
+            '-'
+        ),
+        $post['title']
+    );
+    $normalized = Normalizer::normalize($filename, Normalizer::NFD);
+    $filename = preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $normalized);
+    $filename = strtolower( $filename ) . '.json';
+
+    return $filename;
+}
+add_filter( 'acf/json/save_file_name', 'custom_acf_json_filename', 10, 3 );
 
 
 
@@ -65,9 +94,9 @@ function cargar_custom_fields( $paths ) {
 	
     unset($paths[0]);
 
-	$paths[] = get_template_directory_uri() . '/fields';
+    $paths[] = WORDPYCAT_PATH . 'fields';
 
-	return $paths;
+    return $paths;
 }
 
 add_filter( 'acf/settings/load_json', 'cargar_custom_fields' );

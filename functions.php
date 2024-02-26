@@ -5,6 +5,12 @@ include(plugin_dir_path( __FILE__) . 'includes/extras.php');
 include(plugin_dir_path( __FILE__) . 'includes/blocks.php');
 
 
+/********************************************************
+CONSTANTES
+ ********************************************************/
+define('WORDPYCAT_PATH', plugin_dir_path( __FILE__ ));      //slash at the end
+define('WORDPYCAT_URL', get_template_directory_uri() . '/');  //slash at the end
+
 /*
  * Añade JS y CSS al tema
  */

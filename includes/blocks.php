@@ -28,6 +28,20 @@ function registrar_bloques() {
 
 add_action( 'acf/init', 'registrar_bloques' );
 
+/**
+ * Registrar scripts de los bloques
+ */
+
+function registrar_estilo_bloques() {
+    $version = '1.0.0';
+
+    // Añadir aquí los scripts de todos los bloques
+    wp_register_style( 'wordpycat-block-style', get_template_directory_uri() . 'blocks/wordpycat-block/estilos.css', array(), $version );
+
+}
+
+add_action( 'acf/init', 'registrar_estilo_bloques' );
+
 
 
 /**
@@ -38,7 +52,7 @@ add_action( 'acf/init', 'registrar_bloques' );
     $version = '1.0.0';
 
     // Añadir aquí los scripts de todos los bloques
-    wp_register_script( 'wordpycat-block', get_template_directory_uri() . 'blocks/wordpycat-block/app.js', array( 'acf' ), $version, true );
+    wp_register_script( 'wordpycat-block-js', get_template_directory_uri() . 'blocks/wordpycat-block/app.js', array( 'acf' ), $version, true );
 
 }
 

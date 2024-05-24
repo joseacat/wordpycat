@@ -4,7 +4,8 @@
     "description": "Descripción del bloque de ejemplo.",
     "category": "wordpycat",
     "icon": "embed-post",
-    "style": ["file:./estilos.css"],
+    "style": ["worpycat-block-style"],
+    "viewScript": ["worpypcat-block-js"],
     "keywords": ["featured", "blog", "posts", "selection"],
     "apiVersion": 2,
     "acf": {

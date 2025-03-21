@@ -1,69 +1,362 @@
 /*
-Theme Name: WordPycat
-Author: Jose A. Catalan
-Author URI: http://joseacat.io/
-Description: Plantilla en blanco para WordPress
-Version: 1.0
+Theme Name: wiris
+Author: Bisiesto Estudio
+Author URI: https://bisiesto.es
+Theme URI: 
+Tags: full-site-editing, block-patterns
+Text Domain: wiris
+Requires at least: 6.4
+Requires PHP: 7.4
+Tested up to: 6.4
+Version: 100.0
+
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: wordpycat
 */
 
+/* Colors theme */
+html:root {
+    --wp--preset--color--black: #0B0B0B;
+    --wp--preset--color--white: #FFFFFF;
+    --wp--preset--color--grey-med: #D8D8D8;
+    --wp--preset--color--grey-light: #F2F2F2;
+    --wp--preset--color--grey: #323740;
+    --wp--preset--color--grey-dark: #18212F;
+    --wp--preset--color--green: #90CA5B;
+    --wp--preset--color--green-dark: #007B52;
+    --wp--preset--color--blue-light: #0095CB;
+    --wp--preset--color--blue-dark: #006095;
+    --wp--preset--color--pink: #FF4A60;
+    --wp--preset--color--red: #ED0C2A;
+    --wp--preset--color--burgundy: #B10937;
+    --wp--preset--color--orange-red: #CC110D;
+    --wp--preset--color--orange: #FFB500;
+    --wp--preset--color--yellow: #FFD76B;
+    --wp--preset--color--aquamarine-dark: #007684;
+    --wp--preset--color--aquamarine: #00C0B7;
+    --wp--preset--color--blue-baby: #EAF2FD;
+    --wp--preset--color--red-light: #FFEDEF;
+    --wp--preset--color--transparent: transparent;
+    --wp--preset--color--contrast: #0B0B0B;
+    --wp--preset--color--primary: #18212F;
+    --wp--preset--color--transparent: #18212F;
 
-/* Colores estilo claro */
-::backdrop, 
-:root {
-    --sans-font: -apple-system,BlinkMacSystemFont,"Avenir Next",Avenir,"Nimbus Sans L",Roboto,"Noto Sans","Segoe UI",Arial,Helvetica,"Helvetica Neue",sans-serif;
-    --mono-font: Consolas,Menlo,Monaco,"Andale Mono","Ubuntu Mono",monospace;
+}
+
+/* Gradients */
+html:root {
+    --wp--preset--gradient--primary-white: linear-gradient(#0095CB 49.9%, #fff 50%);
+    --wp--preset--gradient--white-primary: linear-gradient(#fff 49.9%, #0095CB 50%);
+}
+
+/* Duotone */
+html:root {
+    --wp--preset--duotone--secondary-primary: #0095CB, #006095;
+    --wp--preset--duotone--primary-contrast: #006095, #f0f0f0;
+}
+
+/* Typo */
+html:root {
+    --wp--preset--font-family--system: 'Noto Sans', sans-serif;
+    --wp--preset--font-family--serif: 'Noto Sans', sans-serif;
+    --wp--preset--font-family--monospace: 'Noto Sans', sans-serif;
+}
+
+/* Fonts */
+@font-face {
+    font-display: swap;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/noto-sans-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('./assets/fonts/noto-sans-600.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./assets/fonts/noto-sans-700.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+html:root {
+    --wp--preset--font-size--xx-large: 1.5rem;
+    /* 24px */
+    --wp--preset--font-size--x-large: 1.125rem;
+    /* 18px */
+    --wp--preset--font-size--large: 1rem;
+    /* 16px */
+    --wp--preset--font-size--medium: 0.875rem;
+    /* 14px */
+    --wp--preset--font-size--small: 0.75rem;
+    /* 12px */
+    --wp--preset--font-size-h1: 3rem;
+    /* 48px */
+    --wp--preset--font-size-h2: 2.375rem;
+    /* 38px */
+    --wp--preset--font-size-h3: 1.875rem;
+    /* 30px */
+    --wp--preset--font-size-h4: 1.5rem;
+    /* 24px */
+    --wp--preset--font-size-h5: 1.125rem;
+    /* 18px */
+}
+
+html:root {
+    --wp--preset--line-height--xx-large: 2rem;
+    /* 32px */
+    --wp--preset--line-height--x-large: 1.625rem;
+    /* 26px */
+    --wp--preset--line-height--large: 1.375rem;
+    /* 22px */
+    --wp--preset--line-height--medium: 1.125rem;
+    /* 18px */
+    --wp--preset--line-height--small: 0.875rem;
+    /* 14px */
+    --wp--preset--line-height-h1: 3.25rem;
+    /* 52px */
+    --wp--preset--line-height-h2: 2.875rem;
+    /* 46px */
+    --wp--preset--line-height-h3: 2.375rem;
+    /* 38px */
+    --wp--preset--line-height-h4: 1.875rem;
+    /* 30px */
+    --wp--preset--line-height-h5: 1.5rem;
+    /* 24px */
+}
+
+h1 {
+    font-size: var(--wp--preset--font-size-h1);
+    line-height: var(--wp--preset--line-height-h1);
+}
+
+h2 {
+    font-size: var(--wp--preset--font-size-h2);
+    line-height: var(--wp--preset--line-height-h2);
+}
+
+h3 {
+    font-size: var(--wp--preset--font-size-h3);
+    line-height: var(--wp--preset--line-height-h3);
+}
+
+h4 {
+    font-size: var(--wp--preset--font-size-h4);
+    line-height: var(--wp--preset--line-height-h4);
+}
+
+h5 {
+    font-size: var(--wp--preset--font-size-h5);
+    line-height: var(--wp--preset--line-height-h5);
+}
+
+
+/* Design */
+html:root {
+    --wp--custom--layout--content-size: 1160px;
+    --wp--custom--layout--wide-size: 1280px;
+}
+
+html:root :where(.wp-element-button, .wp-block-button__link) {
+    border-width: 2px;
+    box-shadow: none;
+    color: var(--wp--preset--color--white);
+    font-size: var(--wp--preset--font-size--large);
+}
+
+html:root :where(.wp-element-button, .wp-block-button__link):hover {
+    background-color: var(--wp--preset--color--grey);
+    border-color: var(--wp--preset--color--grey);
+}
+
+html:root :where(.wp-block-button.is-style-outline--2 .wp-block-button__link) {
+    color: var(--wp--preset--color--black);
+}
+
+html:root :where(.wp-block-button.is-style-outline--2 .wp-block-button__link):hover {
+    background-color: var(--wp--preset--color--white);
+    border-color: var(--wp--preset--color--black);
+}
+
+html:root :where(.wp-element-button:hover, .wp-block-button__link:hover) {
+    border-color: var(--wp--preset--color--primary);
+}
+
+.alignfull {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    max-width: calc(100vw - 8px);
+    width: auto;
+}
+
+/* Spacing */
+html:root {
+    --wp--preset--spacing--60: 3.75rem;
+    --wp--preset--spacing--50: 3.125rem;
+    --wp--preset--spacing--40: 2.5rem;
+    --wp--preset--spacing--30: 1.875rem;
+    --wp--preset--spacing--20: 1.125rem;
+    --wp--preset--spacing--13: 0.813rem;
+}
+
+/* Light mode */
+html::backdrop,
+html:root {
+    --sans-font: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, "Helvetica Neue", sans-serif;
+    --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     --standard-border-radius: 5px;
-    --bg: #fff;
-    --accent-bg: #f5f7ff;
-    --text: #212121;
+    --bg: var(--wp--preset--color--white);
+    --accent-bg: var(--wp--preset--color--grey-light);
+    --text: var(--wp--preset--color--black);
     --text-light: #585858;
     --border: #898EA4;
-    --accent: #0d47a1;
+    --accent: var(--wp--preset--color--grey-dark);
     --code: #d81b60;
     --preformatted: #444;
     --marked: #ffdd33;
-    --disabled: #efefef;	
-
+    --disabled: #efefef;
+    --wp--preset--color--base: #FFFFFF;
 }
 
-/* Colores estilo oscuro */
-@media (prefers-color-scheme: dark){
-	::backdrop, :root {
-		color-scheme: dark;
-		--bg: #212121;
-		--accent-bg: #2b2b2b;
-		--text: #dcdcdc;
-		--text-light: #ababab;
-		--accent: yellowgreen;
-		--code: #f06292;
-		--preformatted: #ccc;
-	    --disabled: #111;
-	}
+/* End light mode */
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+
+    html::backdrop,
+    html:root {
+        color-scheme: dark;
+        --bg: var(--wp--preset--color--white);
+    }
 }
 
-/* Medidas */
-::backdrop, 
-:root {
-	--acotado: 990px;
+/* End dark mode */
+
+
+/* Styles intended only for the front.*/
+html {
+    scroll-behavior: smooth;
 }
-/* --wp--style--global--content-size: 840px; */
-/* --wp--style--global--wide-size: 1100px; */
+
+@media screen and (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
 body {
-	min-height: 100vh;
-	scroll-behavior: smooth;
-	text-rendering: optimizeSpeed;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    grid-template-columns: 1fr min(var(--wp--custom--layout--content-size), 90%) 1fr;
 }
-/* General */
-html{
-	background: var(--blanco);
+
+img,
+video {
+    opacity: 1;
 }
-.alignright {
-	float:right;
+
+article,
+dialog,
+fieldset {
+    border: none;
 }
-.alignleft {
-	float: left;
+
+body a:where(:not(.wp-element-button)),
+body a:where(:not(.wp-element-button)):visited {
+    color: var(--accent);
 }
-/* Fin General */
+
+.wp-block-button.is-style-arrow .wp-element-button,
+.wp-block-button.is-style-arrow .wp-block-button__link {
+    position: relative;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 1px 0;
+    padding-right: 28px;
+    color: var(--text);
+}
+
+.wp-block-button.is-style-arrow .wp-element-button::after,
+.wp-block-button.is-style-arrow .wp-block-button__link::after {
+    position: absolute;
+    content: url('./assets/images/ic_arrow.svg');
+}
+
+.wp-block-button.is-style-arrow .wp-element-button::before,
+.wp-block-button.is-style-arrow .wp-block-button__link::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    bottom: 5px;
+    height: 2px;
+    background-color: var(--text);
+    transition: bottom 0.2s ease-in-out;
+}
+
+.wp-block-button.is-style-arrow .wp-element-button:hover::before,
+.wp-block-button.is-style-arrow .wp-block-button__link:hover::before {
+    bottom: 1px;
+}
+
+/* Header */
+.header-general {
+    display: grid;
+    grid-template-columns: 1fr min(var(--wp--custom--layout--content-size), 90%) 1fr;
+    border: 0;
+    padding-bottom: 0;
+}
+
+.inner-header-general {
+    display: flex;
+    align-items: center;
+}
+
+.menu ul.nav {
+    display: flex;
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+.header-general .menu-main {
+    flex: 1;
+}
+
+.header-general .logo-header {
+    margin-right: 2.5rem;
+}
+
+.header-general .menu-second,
+.header-general .menu-ctas {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.header-general .menu a {
+    text-decoration: none;
+}
+
+.header-general .menu a {
+    font-size: var(--wp--preset--font-size--large);
+    font-weight: 700;
+}
+
+.header-general .menu .nav .page_item:not(:last-child),
+.header-general .menu .nav .menu-item:not(:last-child) {
+    margin-right: 18px;
+}
+
+/* End Header */

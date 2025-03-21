@@ -1,32 +1,38 @@
 <?php
 
-include(plugin_dir_path( __FILE__) . 'includes/config.php');
-include(plugin_dir_path( __FILE__) . 'includes/extras.php');
-include(plugin_dir_path( __FILE__) . 'includes/blocks.php');
-
-
-/********************************************************
-CONSTANTES
- ********************************************************/
-define('WORDPYCAT_PATH', plugin_dir_path( __FILE__ ));      //slash at the end
-define('WORDPYCAT_URL', get_template_directory_uri() . '/');  //slash at the end
-
-/*
- * Añade JS y CSS al tema
+/**
+ * Functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package wiris
+ * @since 1.0.0
  */
-add_action('wp_enqueue_scripts', 'registrar_jscss');
-function registrar_jscss(){
-	$version = '1.0.0';
 
-	// Añadimos las hojas de estilos
-	wp_enqueue_style('simple', get_template_directory_uri() . '/recursos/css/simple.min.css', array(), $version);
-	wp_enqueue_style('bloques', get_template_directory_uri() . '/recursos/css/bloques.css', array(), $version);
-	wp_enqueue_style('style', get_stylesheet_uri(), array(), $version);
+define('BISIESTHEME_SLUG', 'wiris');
+define('BISIESTHEME_VERSION', rand(1, 19999));
 
-	// Añadimos los archivos JavaScript
-	wp_enqueue_script('app', get_template_directory_uri() . '/recursos/js/app.js', array(), $version, true);
 
+include(plugin_dir_path(__FILE__) . 'includes/config.php');
+include(plugin_dir_path(__FILE__) . 'includes/extras.php');
+include(plugin_dir_path(__FILE__) . 'includes/blocks.php');
+
+
+/**
+ * Enqueue the CSS files.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function bisiestheme_styles()
+{
+    // CSS
+    wp_enqueue_style('simple', get_template_directory_uri() . '/assets/css/simple.min.css', array(), BISIESTHEME_VERSION);
+    wp_enqueue_style('blocks', get_template_directory_uri() . '/assets/css/blocks.css', array(), BISIESTHEME_VERSION);
+    wp_enqueue_style('wiris-style', get_stylesheet_uri(), [], BISIESTHEME_VERSION);
+
+    // JS
+    wp_enqueue_script('app', get_template_directory_uri() . '/assets/js/app.js', array(), BISIESTHEME_VERSION, true);
 }
-
-
-
+add_action('wp_enqueue_scripts', 'bisiestheme_styles');

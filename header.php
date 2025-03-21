@@ -1,33 +1,38 @@
+<?php
+
+/**
+ * Header
+ *
+ */
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-	<head>
-		<?php if(is_front_page()){ ?>
-			<title><?php bloginfo('name'); ?> | <?php bloginfo('description'); ?></title>
-		<?php }else{ ?>
-			<title><?php wp_title(' | ', 'echo', 'right'); ?><?php bloginfo('name'); ?></title>
-		<?php } ?>
-		<meta charset="<?php bloginfo( 'charset' ); ?>" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		<?php wp_head(); ?>
-	</head>
-	<header class="cabecera-general">
-		<div class="interior-cabecera-general">
-			<div class="cabecera-logo">
-				<a href="<?php echo get_site_url(); ?>" title="<?php the_title(); ?>">
-					<?php echo pintar_logo(); ?>
-				</a>
-			</div>
-			<div class="cabecera-menu">
-				<nav role="navigation">
-					<?php wp_nav_menu( array( 'theme_location' => 'menu-principal',  'menu_class' => 'nav navbar-nav', 'container' => 'ul' ) ); ?>
-				</nav>
-			</div>
-			<div class="cabecera-buscador">
-				<?php get_search_form(); ?>
-			</div>
-		</div>
-	</header>
-	<body <?php body_class(isset($class) ? $class : ''); ?>>
-		<main class="main-general">
+
+<head>
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="pingback" href="<?php echo esc_url(get_bloginfo('pingback_url')); ?>">
+    <?php wp_head(); ?>
+</head>
+
+<body <?php body_class(); ?>>
+    <?php wp_body_open(); ?>
+    <header id="site-header" class="header-general">
+        <?php $is_front = ! is_paged() && (is_front_page() || (is_home() && ((int) get_option('page_for_posts') !== get_queried_object_id()))); ?>
+        <div></div>
+        <div class="inner-header-general">
+            <div class="logo-header">
+                <a class="home-link" href="<?php echo esc_url(home_url('/')); ?>" rel="home" <?php echo $is_front ? 'aria-current="page"' : ''; ?>>
+                    <?php echo print_logo(); ?>
+                </a>
+            </div>
+
+            <div id="main-menu" class="menu menu-main">
+                <nav role="navigation">
+                    <?php wp_nav_menu(array('theme_location' => 'main-menu',  'menu_class' => 'nav navbar-nav', 'container' => 'ul')); ?>
+                </nav>
+            </div>
+        </div>
+        <div></div>
+    </header>

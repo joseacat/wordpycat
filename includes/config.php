@@ -1,87 +1,111 @@
 <?php
 
-/*
- * Registramos los menús para nuestro tema
- */
-add_action( 'init', 'registrar_menus' );
-function registrar_menus() {
-	register_nav_menus(
-		array(
-			'menu-principal' => __( 'Menú principal', 'wordpycat'),
-			'menu-secundario' => __( 'Menú secundario', 'wordpycat' )
-		)
-	);
-}
-
-
 /**
- * Registrar el sidebar
+ * Register menu for theme
  */
-function registrar_sidebar() {
-	register_sidebar(
-		array(
-			'name' => __( 'Sidebar lateral', 'wordpycat' ),
-			'id' => 'sidebar-1',
-			'description' => __( 'Sidebar WordPycat.', 'wordpycat' ),
-			'class' => 'footer-sidebar',
-			'before_widget' => '<li id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</li>',
-			'before_title'  => '<h3>',
-			'after_title'   => '</h3>',
-	));
-}
-add_action( 'widgets_init', 'registrar_sidebar' );
-
-
-/**
- * Personaliza el tema
- */
-function customizar_tema() {
-	// Permite utilizar la funcionalidad de WordPress para añadir logo al header
-    $defaults = array(
-		'height'      => 100,
-		'width'       => 400,
-		'flex-height' => true,
-		'flex-width'  => true,
-		'header-text' => array( 'site-title', 'site-description' ),
+function menu_register()
+{
+    register_nav_menus(
+        array(
+            'main-menu'         =>  __('Main menu', BISIESTHEME_SLUG),
+            'footer-menu'       =>  __('Footer menu', BISIESTHEME_SLUG)
+        )
     );
-    add_theme_support( 'custom-logo', $defaults );
-    // Permite alignwide y fullalign de Gutenberg
-    add_theme_support( 'align-wide' );
-	// Soporta post-thumbnail
-	add_theme_support( 'post-thumbnails' );
 }
-add_action( 'after_setup_theme', 'customizar_tema' );
-
+add_action('init', 'menu_register');
 
 /**
- * Función que agregar el preload a archivos CSS.
+ * Register widgets for theme
  */
-function agregar_rel_preload( $html, $handle, $href, $media ) {
-	if ( is_admin() ) {
-		return $html;
-	}
-	// Aplicar rel preload solo a los assets que estén dentro de este array.
-	$assets = [ 'wp-block-library' ];
-	if ( ! in_array( $handle, $assets ) ) {
-		return $html;
-	}
+function widgets_register()
+{
+    register_sidebar(
+        array(
+            'name'              =>  __('Main sidebar', 'wordpycat'),
+            'id'                =>  'main-sidebar',
+            'description'       =>  __('Main sidebar for theme.', 'wordpycat'),
+            'class'             =>  'main-sidebar custom-sidebar',
+            'before_widget'     =>  '<li id="%1$s" class="widget %2$s">',
+            'after_widget'      =>  '</li>',
+            'before_title'      =>  '<p>',
+            'after_title'       =>  '</p>',
+        )
+    );
+}
+add_action('widgets_init', 'widgets_register');
+
+/**
+ * Customize theme
+ */
+function customize_bisiestheme()
+{
+    // Allow alignwide and fullalign Gutenberg
+    add_theme_support('align-wide');
+    // Allow post-thumbnail
+    add_theme_support('post-thumbnails');
+    add_theme_support('title-tag');
+}
+add_action('after_setup_theme', 'customize_bisiestheme');
+
+/**
+ * Add preload to CSS files
+ */
+function agregar_rel_preload($html, $handle, $href, $media)
+{
+    if (is_admin()) {
+        return $html;
+    }
+    $assets = ['wp-block-library'];
+    if (! in_array($handle, $assets)) {
+        return $html;
+    }
     $html = <<<EOT
 <link rel='preload' as='style' id='$handle' href='$href' type='text/css' media='$media' />
 EOT;
     return $html;
 }
-add_filter( 'style_loader_tag', 'agregar_rel_preload', 10, 4 );
-
+add_filter('style_loader_tag', 'agregar_rel_preload', 10, 4);
 
 /**
- * Elimina link innecesarios del head
+ * Remove unnecessary links from the head
  */
-function remove_headlinks() {
-    remove_action( 'wp_head', 'wp_generator' );
-    remove_action( 'wp_head', 'rsd_link' );
-    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-    remove_action( 'wp_print_styles', 'print_emoji_styles' );
-    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+function remove_headlinks()
+{
+    remove_action('wp_head', 'wp_generator');
+    remove_action('wp_head', 'rsd_link');
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
 }
-add_action( 'init', 'remove_headlinks' );
+add_action('init', 'remove_headlinks');
+
+/**
+ * Allow SVG images
+ */
+function allow_svg($mimes = array())
+{
+    $mimes['svg'] = 'image/svg+xml';
+    $mimes['svgz'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'allow_svg');
+
+/**
+ * Separated assets block
+ */
+add_filter('should_load_separate_core_block_assets', '__return_true');
+
+/**
+ * Custom styles for Gutenberg blocks
+ */
+function custom_gutenberg_styles()
+{
+    wp_enqueue_script(
+        'custom-gutenberg-styles',
+        get_template_directory_uri() . '/assets/js/custom-block.js',
+        array('wp-blocks', 'wp-dom-ready'),
+        null,
+        true
+    );
+}
+add_action('enqueue_block_editor_assets', 'custom_gutenberg_styles');

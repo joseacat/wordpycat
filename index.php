@@ -1,41 +1,29 @@
 <?php
+
 /**
- * Index principal
+ * Index
  */
 
-
-// Cabecera
 get_header(); ?>
 
-<?php
-if(have_posts()){
-	while(have_posts()){
-		?>
-		<article>
-		<?php the_post(); ?>
-		<?php
-		if(has_post_thumbnail()){
-			the_post_thumbnail('thumbnail');
-		}else{
-			?>
-			<img src="<?php echo get_template_directory_uri(); ?>/recursos/img/sin-imagen.jpg" alt="<?php _x('Sin imagen', 'woopycat'); ?>">
-			<?php
-		}
-		?>
-		<a href="<?php the_permalink(); ?>">
-			<?php the_title('<h1>','</h1>'); ?>
-		</a>
-		<p><?php the_excerpt(); ?></p>
-		</article>
-		<?php
-	}
-	next_posts_link( '<<');
-	previous_posts_link( '>>' );
-}else{
-	?>
-	<h1><?php echo __('No hay contenido', 'wordpycat'); ?></h1>
-	<?php
-}
+<main role="main" aria-label="Content">
+    <section>
+        <?php
+        if (have_posts()) :
+            while (have_posts()) :
+                the_post(); ?>
+                <div class="post-single">
+                    <div class="post-title">
+                        <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
+                    </div>
+                </div>
+        <?php endwhile;
+            the_posts_navigation();
+        else :
+            echo 'No posts yet';
+        endif;
+        ?>
+    </section>
+</main>
 
-// Footer
-get_footer();
+<?php get_footer(); ?>

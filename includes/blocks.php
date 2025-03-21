@@ -115,4 +115,3 @@ function cargar_custom_fields( $paths ) {
 
 add_filter( 'acf/settings/load_json', 'cargar_custom_fields' );
 
-

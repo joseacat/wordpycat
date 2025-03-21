@@ -1,16 +1,17 @@
 <?php
 
 /**
- * Pinta el logo o la cabecera si no está la imagen configurada
+ * Print logo
  */
-function pintar_logo(){
+function print_logo()
+{
     $texto = '';
     $logo_id = get_theme_mod('custom_logo');
     $logo = wp_get_attachment_image_src($logo_id, 'full');
-    if(has_custom_logo()){
+    if (has_custom_logo()) {
         $texto = '<img src="' . esc_url($logo[0]) . '">';
-	}else{
-        $texto = '<h1>' . get_bloginfo( 'name' ) .  '</h1>';
-	}
+    } else {
+        $texto = '<span>' . get_bloginfo('name') .  '</span>';
+    }
     return $texto;
 }

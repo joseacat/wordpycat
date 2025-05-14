@@ -7,22 +7,34 @@
 get_header(); ?>
 
 <main role="main" aria-label="Content">
-    <section>
-        <?php
-        if (have_posts()) :
-            while (have_posts()) :
+    <section class="grid-cards-post">
+        <?php if (have_posts()):
+            while (have_posts()):
                 the_post(); ?>
-                <div class="post-single">
-                    <div class="post-title">
-                        <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
+                <article class="card-post">
+                    <div>
+                        <div class="image">
+                            <a href="<?php the_permalink(); ?>">
+                                <?php echo get_the_post_thumbnail(
+                                    get_the_ID(),
+                                    "full"
+                                ); ?>
+                            </a>
+                        </div>
+                        <div class="meta-post">
+                            <div class="title">
+                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                            </div>
+                            <div class="date">
+                                <small><?php echo get_the_date(); ?></small>
+                            </div>
+                        </div>
                     </div>
-                </div>
-        <?php endwhile;
+                </article>
+            <?php
+            endwhile;
             the_posts_navigation();
-        else :
-            echo 'No posts yet';
-        endif;
-        ?>
+        endif; ?>
     </section>
 </main>
 

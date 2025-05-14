@@ -179,19 +179,19 @@
 			"fontSizes": [
 				{
 					"slug": "small",
-					"size": "1.125rem",
+					"size": "12px",
 					"name": "Small",
 					"fluid": false
 				},
 				{
 					"slug": "medium",
-					"size": "1.5rem",
+					"size": "14px",
 					"name": "Medium",
 					"fluid": false
 				},
 				{
 					"slug": "large",
-					"size": "2rem",
+					"size": "16px",
 					"name": "Large",
 					"fluid": {
 						"min": "1.75rem",
@@ -200,7 +200,7 @@
 				},
 				{
 					"slug": "x-large",
-					"size": "2.75rem",
+					"size": "18px",
 					"name": "XL",
 					"fluid": {
 						"min": "2.5rem",
@@ -209,12 +209,42 @@
 				},
 				{
 					"slug": "xx-large",
-					"size": "3.75rem",
+					"size": "24px",
 					"name": "XXL",
 					"fluid": {
 						"min": "3rem",
 						"max": "3.75rem"
 					}
+				},
+				{
+					"slug": "h1",
+					"size": "48px",
+					"name": "H1",
+					"fluid": {}
+				},
+				{
+					"slug": "h2",
+					"size": "38px",
+					"name": "H2",
+					"fluid": {}
+				},
+				{
+					"slug": "h3",
+					"size": "30px",
+					"name": "H3",
+					"fluid": {}
+				},
+				{
+					"slug": "h4",
+					"size": "24px",
+					"name": "H4",
+					"fluid": {}
+				},
+				{
+					"slug": "h5",
+					"size": "18px",
+					"name": "H5",
+					"fluid": {}
 				}
 			]
 		},

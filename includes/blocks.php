@@ -1,117 +1,75 @@
 <?php
-
-/**
- * Añadir categoría para los bloques creados.
- */
-function agregar_categoria_bloques( $categories ) {
-	array_unshift( $categories, array(
-		'slug'	=> 'wordpycat',
-		'title' => __( 'WordPycat', 'wordpycat' ),
-		'icon'  => null,
-	) );
-	return $categories;
+if (!defined('ABSPATH')) {
+    exit;
 }
 
-add_filter( 'block_categories_all', 'agregar_categoria_bloques', 1, 2 );
+class Theme_Blocks {
 
+    private $namespace = 'wordpycat';
+    private $blocks = [
+        'hero'
+    ];
 
-/**
- * Registrar todos los bloques de ACF
- */
+    public function __construct() {
+        add_action('acf/init', [$this, 'register_acf_blocks']);
+        add_action('init', [$this, 'register_block_category']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_block_assets']);
+        add_action('acf/include_fields', [$this, 'include_acf_fields']);
+    }
 
-function registrar_bloques() {
-    error_log('Registrando bloques');
-    if( function_exists('register_block_type') ){
-        register_block_type( WORDPYCAT_PATH . 'blocks/wordpycat-block' );
+    public function register_block_category() {
+        add_filter('block_categories_all', function($categories) {
+            array_unshift($categories, [
+                'slug'  => $this->namespace,
+                'title' => __('Bloques del tema', BISIESTHEME_SLUG),
+            ]);
+            return $categories;
+        });
+    }
+
+    public function register_acf_blocks() {
+        foreach ($this->blocks as $block) {
+            $template_path = get_template_directory() . "/blocks/{$block}/template.php";
+
+            if (!file_exists($template_path)) {
+                continue;
+            }
+
+            acf_register_block_type([
+                'name'              => "{$this->namespace}-{$block}",
+                'title'             => ucfirst($block),
+                'description'       => "Custom block: {$block}",
+                'render_template'   => $template_path,
+                'category'          => $this->namespace,
+                'icon'              => 'layout',
+                'mode'              => 'preview', //preview
+                'supports'          => [
+                    'align' => true,
+                    'mode'  => true,
+                    'jsx'   => true,
+                ],
+                'api_version' => 2,
+                'enqueue_style'     => get_template_directory_uri() . "/blocks/{$block}/styles.css",
+                'enqueue_script'    => file_exists(get_template_directory() . "/blocks/{$block}/script.js")
+                    ? get_template_directory_uri() . "/blocks/{$block}/script.js"
+                    : '',
+            ]);
+        }
+    }
+
+    public function enqueue_block_assets() {
+        // Aquí puedes registrar estilos globales si hiciera falta
+    }
+
+    public function include_acf_fields() {
+        foreach ($this->blocks as $block) {
+            $fields_path = get_template_directory() . "/blocks/{$block}/fields.php";
+            if (file_exists($fields_path)) {
+                include $fields_path;
+            }
+        }
     }
 }
 
-add_action( 'acf/init', 'registrar_bloques' );
-
-/**
- * Registrar scripts de los bloques
- */
-
-function registrar_estilo_bloques() {
-    $version = '1.0.0';
-
-    // Añadir aquí los scripts de todos los bloques
-    wp_register_style( 'wordpycat-block-style', get_template_directory_uri() . 'blocks/wordpycat-block/estilos.css', array(), $version );
-
-}
-
-add_action( 'acf/init', 'registrar_estilo_bloques' );
-
-
-
-/**
- * Registrar scripts de los bloques
- */
-
- function registrar_scripts_bloques() {
-    $version = '1.0.0';
-
-    // Añadir aquí los scripts de todos los bloques
-    wp_register_script( 'wordpycat-block-js', get_template_directory_uri() . 'blocks/wordpycat-block/app.js', array( 'acf' ), $version, true );
-
-}
-
-add_action( 'acf/init', 'registrar_scripts_bloques' );
-
-
-
-/**
- * Añade ruta para que se guarden los custom fields en la carpeta fields.
- * https://www.advancedcustomfields.com/resources/local-json/#saving-explained
- */
-function guardar_custom_fields( $path ) {
-    $path = WORDPYCAT_PATH. 'fields';
-
-	return $path;
-}
-
-add_filter('acf/settings/save_json', 'guardar_custom_fields' );
-
-
-
-/**
- * Customiza el nombre de los archivos que se guardan.
- */
-
-function custom_acf_json_filename( $filename, $post, $load_path ) {
-    $filename = str_replace(
-        array(
-            ' ',
-            '_',
-        ),
-        array(
-            '-',
-            '-'
-        ),
-        $post['title']
-    );
-    $normalized = Normalizer::normalize($filename, Normalizer::NFD);
-    $filename = preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $normalized);
-    $filename = strtolower( $filename ) . '.json';
-
-    return $filename;
-}
-add_filter( 'acf/json/save_file_name', 'custom_acf_json_filename', 10, 3 );
-
-
-
-/**
- * Set path for saving ACF JSON files.
- * https://www.advancedcustomfields.com/resources/local-json/#loading-explained
- */
-function cargar_custom_fields( $paths ) {
-	
-    unset($paths[0]);
-
-    $paths[] = WORDPYCAT_PATH . 'fields';
-
-    return $paths;
-}
-
-add_filter( 'acf/settings/load_json', 'cargar_custom_fields' );
-
+// Init
+new Theme_Blocks();

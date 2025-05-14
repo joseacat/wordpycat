@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Page
+ * Single
  */
 
 get_header(); ?>
@@ -9,10 +9,15 @@ get_header(); ?>
 <main role="main" aria-label="Content">
     <section>
         <?php
-	if (have_posts()) :
+        if (have_posts()) :
             the_post(); ?>
-            <div class="page-single">
-		<?php the_content(); ?>
+            <header class="header-page alignfull" style="background-image: url('<?php the_post_thumbnail_url(); ?>')">
+                <div>
+                    <?php the_title('<h1>', '</h1>'); ?>
+                </div>
+            </header>
+            <div class="single-page">
+                <?php the_content(); ?>
             </div>
         <?php
         endif;
